@@ -1,4 +1,10 @@
+"use client"
+import { useUserStore } from "@/app/utils/store"
+
 export default function Navbar(){
+
+    const {user} = useUserStore();
+
     return(
         <div className="navbar bg-gray-800 relative z-50">
         <div className="flex-1">
@@ -6,7 +12,7 @@ export default function Navbar(){
         </div>
         <div className="flex-none">
             <ul className="menu menu-horizontal px-4">
-            <li><a>Login</a></li>
+            <li><a href="/auth/login">Login</a></li>
             <li>
                 <details>
                 <summary>
