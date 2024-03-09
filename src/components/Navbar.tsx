@@ -1,9 +1,38 @@
 "use client"
-import { useUserStore } from "@/app/utils/store"
+import { useUserStore } from "@/app/utils/store";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Navbar(){
 
-    const {user} = useUserStore();
+    const router = useRouter();
+    const {user,setUser} = useUserStore();
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('/api/auth/refresh');
+            const data = response.data.data;
+            if(data === null){
+                setUser({email:"",username:"",id:"",isAdmin:false});
+                return;
+            }
+            setUser({email:data.email,username:data.username,id:data._id,isAdmin:data.isAdmin});
+        } 
+        catch (error) {
+            console.log("BT",error);
+        }
+    }
+
+    const logoutFn = async() => {
+        try {
+            await axios.get('/api/auth/logout');
+            router.push('/auth/login');
+            fetchData();
+        } 
+        catch (error:any) {
+            console.log(error.message);    
+        }
+    }
 
     return(
         <div className="navbar bg-gray-800 relative z-50">
@@ -12,17 +41,36 @@ export default function Navbar(){
         </div>
         <div className="flex-none">
             <ul className="menu menu-horizontal px-4">
-            <li><a href="/auth/login">Login</a></li>
+            {
+                user.email && user.id && user.username ? (
+                    null
+                ) : (
+                    <li><a href="/auth/login">Login</a></li>
+                )
+            }
+            {
+                user.isAdmin ? (
+                    <li><a href="/prod">Add Product</a></li>
+                ) : (
+                    null
+                )
+            }
             <li>
-                <details>
-                <summary>
-                    More
-                </summary>
-                <ul className="p-2 rounded-t-none bg-slate-700">
-                    <li><a>Edit</a></li>
-                    <li><a>Logout</a></li>
-                </ul>
-                </details>
+                {
+                    user.email && user.id && user.username ? (
+                        <details>
+                            <summary>
+                                More
+                            </summary>
+                            <ul className="p-2 rounded-t-none bg-slate-700">
+                                <li><a>Edit</a></li>
+                                <li><a onClick={logoutFn}>Logout</a></li>
+                            </ul>
+                        </details>
+                    ) : (
+                        null
+                    )
+                }
             </li>
             </ul>
         </div>
