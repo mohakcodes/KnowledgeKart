@@ -1,4 +1,4 @@
-import connectDB from "@/app/libs/route";
+import connectDB from "@/app/libs/connectDB";
 import { NextRequest, NextResponse } from "next/server";
 import { Product } from "@/app/models/Product";
 

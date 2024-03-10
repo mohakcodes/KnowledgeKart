@@ -1,5 +1,5 @@
 import { getTokenData } from "@/app/helpers/getTokenData";
-import connectDB from "@/app/libs/route";
+import connectDB from "@/app/libs/connectDB";
 import { User } from "@/app/models/User";
 import { NextRequest, NextResponse } from "next/server";
 

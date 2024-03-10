@@ -1,7 +1,7 @@
 import { User } from "@/app/models/User";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
-import connectDB from "@/app/libs/route";
+import connectDB from "@/app/libs/connectDB";
 
 connectDB();
 
