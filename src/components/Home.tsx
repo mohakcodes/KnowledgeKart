@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { useProductStore, useUserStore } from "@/app/utils/store";
@@ -30,7 +30,6 @@ export default function Home(){
                 uniqueBrands.push({ brand, _id: brandId });
               }
             });
-            console.log("ab", uniqueBrands);
             setAllBrands(uniqueBrands);
           };
           
@@ -40,23 +39,22 @@ export default function Home(){
                 const data = response.data.data;
                 if(data === null) return;
                 setUser({email:data.email,username:data.username,id:data._id,isAdmin:data.isAdmin});
-                console.log("US",user);
+                console.log("User",user);
             } 
             catch (error) {
-                console.log("BT",error);
+                console.log("Error",error);
             }
         }
         const fetchProducts = async () => {
             try {
                 const response = await axios.get('/api/products');
                 const data = response.data;
-                console.log("response.data",data);
                 setProducts(data);
                 setFilteredProducts(data);
                 setBrands(data);
             } 
             catch (error) {
-                console.log("BT",error);
+                console.log("Error",error);
             }
         }
         fetchData();
@@ -74,7 +72,6 @@ export default function Home(){
     }
 
     const handleAllFilters = (e:any) => {
-        console.log("yoo");
         e.preventDefault();
         if(range.maxRange > 0 && checkedBrands.length > 0){
             //filter by price range and brand
