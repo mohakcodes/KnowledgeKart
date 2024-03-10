@@ -2,6 +2,7 @@
 import { useUserStore } from "@/app/utils/store";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Navbar(){
 
@@ -27,12 +28,17 @@ export default function Navbar(){
         try {
             await axios.get('/api/auth/logout');
             router.push('/auth/login');
-            fetchData();
+            setUser({email:"",username:"",id:"",isAdmin:false});
+            console.log("user",user);
         } 
         catch (error:any) {
             console.log(error.message);    
         }
     }
+
+    useEffect(()=>{
+        fetchData();
+    },[]);
 
     return(
         <div className="navbar bg-gray-800 relative z-50">
@@ -50,7 +56,7 @@ export default function Navbar(){
             }
             {
                 user.isAdmin ? (
-                    <li><a href="/prod">Add Product</a></li>
+                    <li><a href="/addproduct">Add Product</a></li>
                 ) : (
                     null
                 )
