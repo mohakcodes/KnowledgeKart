@@ -1,3 +1,31 @@
+
+# KnowledgeKart
+
+- Description: KnowledgeKart is an innovative e-commerce platform specifically designed for people with need for stationary items. Built on a robust and modern technology stack, incorporating TypeScript, Next.js, and MongoDB to deliver a seamless and responsive e-commerce experience for users. This platform offers a seamless shopping experience with a variety of features to enhance your stationery shopping journey.
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+Backend
+
+`MONGO_URI`
+`JWT_SECRET_KEY`
+
+## Authors
+
+[@mohakcodes](https://www.github.com/MOHAKCODES)
+
+
+## Features
+
+- User Authentication: Secure and easy-to-use login/signup functionality to create and manage user accounts.
+
+- Product Management: Intuitive product addition interface for the admin to easily upload new stationary items.
+
+- Advanced Filtering: Robust filtering options allowing users to search and filter products based on price ranges and Brand-specific filters for quick access to products from favorite stationary brands.
+
+- User-Friendly Navigation: Intuitive navigation menus and categorization to help users effortlessly explore various stationary categories.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
