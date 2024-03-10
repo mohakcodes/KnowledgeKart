@@ -1,5 +1,4 @@
 "use client"
-import axios, { AxiosHeaders } from "axios";
 import { useEffect, useState } from "react";
 
 export default function AddProduct() {
@@ -67,24 +66,6 @@ export default function AddProduct() {
               });
             
             setBase64(null);
-
-            // const reader = new FileReader();
-            // reader.onloadend = async() => {
-            //     const base64str = reader.result as string;
-            //     console.log("bstr",base64str);
-
-            //     try {
-            //         const res = await axios.post('/api/upload', {
-            //             ...productDetail,
-            //             image: base64str,
-            //         });    
-            //         console.log(res.data);
-            //     } 
-            //     catch (error) {
-            //         console.error("Error uploading data:", error);
-            //     }
-            // }
-            // reader.readAsDataURL(productDetail.image);
         }
         else{
             console.log("No Image");
@@ -107,7 +88,7 @@ export default function AddProduct() {
   return (
     <div className="w-[60%] mx-auto p-4">
       <div>
-        <label className="border text-white px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
+        <label className="border text-black bg-gray-200 px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
           <input
             type="file"
             name="file"
@@ -116,52 +97,52 @@ export default function AddProduct() {
         </label>
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-bold mb-2">Product Name:</label>
+        <label className="block text-sm text-black font-bold mb-2">Product Name:</label>
         <input
           type="text"
           name="productName"
           value={productDetail.productName}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border-2 border-black"
+          className="w-full px-4 py-2 border-2 border-black bg-gray-200 text-black"
         />
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-bold mb-2">Price:</label>
+        <label className="block text-sm text-black font-bold mb-2">Price:</label>
         <input
           type="number"
           name="price"
           value={productDetail.price}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border-2 border-black"
+          className="w-full px-4 py-2 border-2 border-black text-black bg-gray-200"
         />
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-bold mb-2">Quantity:</label>
+        <label className="block text-sm text-black font-bold mb-2">Quantity:</label>
         <input
           type="number"
           name="quantity"
           value={productDetail.quantity}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border-2 border-black"
+          className="w-full px-4 py-2 border-2 border-black text-black bg-gray-200"
         />
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-bold mb-2">Description:</label>
+        <label className="block text-sm text-black font-bold mb-2">Description:</label>
         <textarea
           name="description"
           value={productDetail.description}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border-2 border-black"
+          className="w-full px-4 py-2 border-2 border-black text-black bg-gray-200"
         />
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-bold mb-2">Brand:</label>
+        <label className="block text-sm text-black font-bold mb-2">Brand:</label>
         <input
           type="text"
           name="brand"
           value={productDetail.brand}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border-2 border-black"
+          className="w-full px-4 py-2 border-2 border-black text-black bg-gray-200"
         />
       </div>
       <button

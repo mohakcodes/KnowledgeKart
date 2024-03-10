@@ -3,6 +3,8 @@ import React from 'react'
 
 export default function page() {
   return (
-    <Signup/>
+    <div className='bg-white h-[91vh]'>
+      <Signup/>
+    </div>
   )
 }

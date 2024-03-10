@@ -48,16 +48,16 @@ export default function LoginPage(){
     return(
         <div className='w-full flex justify-center items-center h-[70vh]'>
             <div className='w-[80%] md:w-[35%] flex flex-col justify-center items-center space-y-4'>
-                <h1 className='text-2xl font-bold text-left p-2'>Login To Your Account</h1>
+                <h1 className='text-2xl text-black font-bold text-left p-2'>Login To Your Account</h1>
                 <input
                 onChange={(e) => setCurrentUser({...currentUser, email:e.target.value})}
-                className='w-full px-4 py-2 border-2 border-black'
+                className='w-full px-4 py-2 border-2 border-black bg-gray-200 text-black'
                 type='email'
                 placeholder='Enter Your E-Mail'
                 />
                 <input
                 onChange={(e) => setCurrentUser({...currentUser, password:e.target.value})}
-                className='w-full px-4 py-2 border-2 border-black'
+                className='w-full px-4 py-2 border-2 border-black bg-gray-200 text-black'
                 type='password'
                 placeholder='Enter Your Password'
                 />
@@ -69,7 +69,7 @@ export default function LoginPage(){
                 </button>
                 {error && <h3 className='text-red-500 text-sm'>Something Went Wrong</h3>}
                 <div className='w-full flex justify-start items-center space-x-2'>
-                <p className='italic'>Not Registered?</p>
+                <p className='italic text-black'>Not Registered?</p>
                 <p className='font-semibold px-4 py-[4px] bg-slate-400 hover:bg-fuchsia-300 rounded-lg text-black'>
                     <Link href='signup'>SignUp</Link>
                 </p>

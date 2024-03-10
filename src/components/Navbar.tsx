@@ -41,9 +41,14 @@ export default function Navbar(){
     },[]);
 
     return(
-        <div className="navbar bg-gray-800 relative z-50">
+        <div className="navbar bg-gray-200 relative z-50">
         <div className="flex-1">
-            <a className="btn btn-ghost text-xl">E-Commerce</a>
+            <a 
+                className="btn btn-ghost bg-gray-300 text-blue-950 font-bold text-2xl"
+                href="/"
+            >
+                KnowledgeKart
+            </a>
         </div>
         <div className="flex-none">
             <ul className="menu menu-horizontal px-4">
@@ -51,12 +56,12 @@ export default function Navbar(){
                 user.email && user.id && user.username ? (
                     null
                 ) : (
-                    <li><a href="/auth/login">Login</a></li>
+                    <li className="text-[20px] text-black font-medium"><a href="/auth/login">Login</a></li>
                 )
             }
             {
                 user.isAdmin ? (
-                    <li><a href="/addproduct">Add Product</a></li>
+                    <li className="text-[20px] text-black font-medium"><a href="/addproduct">Add Product</a></li>
                 ) : (
                     null
                 )
@@ -65,12 +70,12 @@ export default function Navbar(){
                 {
                     user.email && user.id && user.username ? (
                         <details>
-                            <summary>
+                            <summary className="text-[20px] text-black font-medium">
                                 More
                             </summary>
-                            <ul className="p-2 rounded-t-none bg-slate-700">
-                                <li><a>Edit</a></li>
-                                <li><a onClick={logoutFn}>Logout</a></li>
+                            <ul className="p-2 rounded-t-none bg-slate-500">
+                                <li className="text-[16px] text-white font-medium"><a>Edit</a></li>
+                                <li className="text-[16px] text-white font-medium"><a onClick={logoutFn}>Logout</a></li>
                             </ul>
                         </details>
                     ) : (

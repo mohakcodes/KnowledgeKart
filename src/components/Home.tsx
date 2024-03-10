@@ -103,10 +103,10 @@ export default function Home(){
     }
 
     return(
-        <div className="flex flex-row min-h-screen">
-            <div className="w-[17%] font-medium py-4 min-h-full text-center bg-gray-700 h-fit border-2 border-gray-900">
+        <div className="flex flex-row min-h-screen bg-white">
+            <div className="w-[17%] font-medium py-4 min-h-full text-center bg-gray-200 m-1 h-fit border-2 border-gray-300 rounded-lg">
                 <div>
-                    <h2 className="text-left font-bold text-lg px-2">Filter By Brand</h2>
+                    <h2 className="text-left text-black font-bold text-lg px-2">Filter By Brand</h2>
                     <div>
                         {
                             allbrand.map((brandObj:any,index:string) => (
@@ -116,12 +116,12 @@ export default function Home(){
                                         type="checkbox"
                                         id="red-checkbox"
                                         onChange={(e) => handleCheck(e, brandObj.brand)}
-                                        className="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        className="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-100 focus:ring-2 dark:bg-gray-100 dark:border-gray-100"
                                         />
 
                                         <label
                                         htmlFor="pink-checkbox"
-                                        className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+                                        className="ml-2 text-sm font-semibold text-gray-800"
                                         >
                                         {brandObj.brand}
                                         </label>
@@ -132,10 +132,10 @@ export default function Home(){
                     </div>
                 </div>
                 <div className="pt-6">
-                    <h2 className="text-left font-bold text-lg px-2">Filter By Price</h2>
+                    <h2 className="text-left font-bold text-lg px-2 text-black">Filter By Price</h2>
                     <div className="flex flex-col gap-1 text-left mr-4 px-5 py-0.5">
                         <div className="flex justify-between">
-                            Min range
+                            <p className="text-gray-800">Min Range</p>
                             <input 
                                 type="number"
                                 value={range.minRange}
@@ -145,7 +145,7 @@ export default function Home(){
                             />
                         </div>
                         <div className="flex justify-between">
-                            Max range
+                            <p className="text-gray-800">Max Range</p>
                             <input 
                                 type="number"
                                 value={range.maxRange}
@@ -158,7 +158,7 @@ export default function Home(){
                 </div>
                 <div>
                     <button 
-                        className="py-2 px-5 bg-orange-600 text-black m-2 rounded-lg mt-6"
+                        className="py-2 px-5 bg-primary text-black font-semibold m-2 rounded-lg mt-6"
                         onClick={(e)=>{handleAllFilters(e)}}
                     >
                         Apply Filter
@@ -167,11 +167,10 @@ export default function Home(){
             </div>
 
             <div className="w-[83%] min-h-full text-center">
-                <h1 className="text-2xl py-3">Top Deals</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2">
                     {
                         filteredProducts.map((product:any, index:any) => (
-                            <div key={index} className="px-4">
+                            <div key={index} className="px-2">
                                 <ProductCard product={product} />
                             </div>
                         ))
