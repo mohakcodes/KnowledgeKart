@@ -1,13 +1,13 @@
-import { Product } from "@/app/types"
+import { ProductType } from "@/app/types"
 
 type Props = {
-    product: Product;
+    product: ProductType;
 }
 
 export default function ProductCard({product}:Props){
     return(
         <div className="card card-compact w-90 bg-gray-900 shadow-xl">
-        <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+        <figure><img src={product.image} alt="img" /></figure>
         <div className="card-body">
             <div className="">
                 <h3 className="card-title text-[16px] whitespace-nowrap overflow-ellipsis overflow-hidden">{product.name}</h3>
