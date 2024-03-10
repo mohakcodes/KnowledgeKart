@@ -35,7 +35,6 @@ export default function LoginPage(){
         try {
           console.log("user",currentUser);
           const res = await axios.post('/api/auth/login', currentUser);
-          console.log("res",res);
           setUser(res.data.sendUser);
           setError(false);
           router.push('/');
