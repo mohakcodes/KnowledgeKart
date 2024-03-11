@@ -1,5 +1,5 @@
 "use client"
-import { useUserStore } from "@/app/utils/store";
+import { useFilterDropDownStore, useUserStore } from "@/app/utils/store";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -8,6 +8,8 @@ export default function Navbar(){
 
     const router = useRouter();
     const {user,setUser} = useUserStore();
+
+    const {isFilterDropdownOpen,toggleFilterDropDown}:any = useFilterDropDownStore();
 
     const fetchData = async () => {
         try {
@@ -44,24 +46,29 @@ export default function Navbar(){
         <div className="navbar bg-gray-200 relative z-50">
         <div className="flex-1">
             <a 
-                className="btn btn-ghost bg-gray-300 text-blue-950 font-bold text-2xl"
+                className="bg-gray-300 py-1 px-2 rounded-md text-blue-950 font-bold text-[16px] sm:text-xl md:text-2xl absolute"
                 href="/"
             >
                 KnowledgeKart
             </a>
         </div>
         <div className="flex-none">
-            <ul className="menu menu-horizontal px-4">
+            <ul className="menu menu-horizontal" style={{padding:0,margin:0,marginRight:0}}>
+                <li className="sm:hidden text-black font-medium">
+                        <a onClick={toggleFilterDropDown}>
+                            Filter
+                        </a>
+                    </li>
             {
                 user.email && user.id && user.username ? (
                     null
                 ) : (
-                    <li className="text-[20px] text-black font-medium"><a href="/auth/login">Login</a></li>
+                    <li className="sm:text-base md:text-lg lg:text-[20px] text-black font-medium"><a href="/auth/login">Login</a></li>
                 )
             }
             {
                 user.isAdmin ? (
-                    <li className="text-[20px] text-black font-medium"><a href="/addproduct">Add Product</a></li>
+                    <li className="hidden sm:inline sm:text-sm md:text-base lg:text-[20px] text-black font-medium"><a href="/addproduct">Add Product</a></li>
                 ) : (
                     null
                 )
@@ -70,12 +77,19 @@ export default function Navbar(){
                 {
                     user.email && user.id && user.username ? (
                         <details>
-                            <summary className="text-[20px] text-black font-medium">
+                            <summary className="sm:text-sm md:text-base lg:text-[20px] text-black font-medium">
                                 More
                             </summary>
-                            <ul className="p-2 rounded-t-none bg-slate-500">
-                                <li className="text-[16px] text-white font-medium"><a>Edit</a></li>
-                                <li className="text-[16px] text-white font-medium"><a onClick={logoutFn}>Logout</a></li>
+                            <ul className="p-0 sm:p-2 rounded-t-none bg-slate-500 sm:mr-2">
+                                <li className="sm:text-[16px] text-white font-medium"><a>Edit</a></li>
+                                {
+                                    user.isAdmin ? (
+                                        <li className="sm:hidden text-white font-medium"><a href="/addproduct">Add Product</a></li>
+                                    ) : (
+                                        null
+                                    )
+                                }
+                                <li className="sm:text-[16px] text-white font-medium"><a onClick={logoutFn}>Logout</a></li>
                             </ul>
                         </details>
                     ) : (

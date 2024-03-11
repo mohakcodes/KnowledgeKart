@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react"
 import ProductCard from "./ProductCard";
 import axios from "axios";
-import { useProductStore, useUserStore } from "@/app/utils/store";
+import { useFilterDropDownStore, useProductStore, useUserStore } from "@/app/utils/store";
 
 export default function Home(){
 
     const {user, setUser} = useUserStore();
+    const {isFilterDropdownOpen}:any = useFilterDropDownStore();
     
     //main store for product data
     const {products, setProducts} = useProductStore();
@@ -103,8 +104,75 @@ export default function Home(){
     }
 
     return(
-        <div className="flex flex-row min-h-screen bg-white">
-            <div className="w-[17%] font-medium py-4 min-h-full text-center bg-gray-200 m-1 h-fit border-2 border-gray-300 rounded-lg">
+        <div className="flex flex-col sm:flex-row min-h-screen bg-white">
+            {
+                isFilterDropdownOpen && (
+                    <div>
+                        <div className="sm:hidden px-3 flex justify-between bg-gray-200 m-1 rounded-lg p-2 border-2 border-gray-300">
+                        <div>
+                            <h2 className="text-left text-black font-semibold text-base px-2">Filter By Brand</h2>
+                            <div>
+                            {
+                                allbrand.map((brandObj:any,index:string) => (
+                                    <div key={index} className="py-1">
+                                        <div className="flex items-center mr-4 px-5">
+                                            <input
+                                            type="checkbox"
+                                            id="red-checkbox"
+                                            onChange={(e) => handleCheck(e, brandObj.brand)}
+                                            className="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-100 focus:ring-2 dark:bg-gray-100 dark:border-gray-100"
+                                            />
+
+                                            <label
+                                            htmlFor="pink-checkbox"
+                                            className="ml-2 text-sm font-semibold text-gray-800"
+                                            >
+                                            {brandObj.brand}
+                                            </label>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <h2 className="text-black font-semibold text-base px-2">Filter By Price</h2>
+                            <div className="flex flex-col gap-1 text-left mr-4 items-left py-0.5 mt-2">
+                                <div className="flex flex-col items-center">
+                                    <p className="text-gray-800 text-[14px] font-medium">Min Range</p>
+                                    <input 
+                                        type="number"
+                                        value={range.minRange}
+                                        className="mx-2 bg-white text-black w-[90px] px-1"
+                                        onChange={(e:any)=>setRange({...range,minRange : e.target.value!=='' ? parseInt(e.target.value) : 0})}
+                                        min={0}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <p className="text-gray-800 text-[14px] font-medium">Max Range</p>
+                                    <input 
+                                        type="number"
+                                        value={range.maxRange}
+                                        min={0}
+                                        className="mx-2 bg-white text-black w-[90px] px-1"
+                                        onChange={(e:any)=>setRange({...range,maxRange : e.target.value!=='' ? parseInt(e.target.value) : 0})}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button 
+                            className="sm:hidden py-1 px-3 bg-primary flex mx-auto text-black font-semibold m-2 rounded-lg"
+                            onClick={(e)=>{handleAllFilters(e)}}
+                        >
+                            Apply Filter
+                        </button>
+                    </div>
+                </div>
+                )
+            }
+            <div className="hidden sm:inline w-[32%] md:w-[25%] lg:w-[17%] font-medium py-4 min-h-full text-center bg-gray-200 m-2 h-fit border-2 border-gray-300 rounded-lg">
                 <div>
                     <h2 className="text-left text-black font-bold text-lg px-2">Filter By Brand</h2>
                     <div>
@@ -166,7 +234,7 @@ export default function Home(){
                 </div>
             </div>
 
-            <div className="w-[83%] min-h-full text-center">
+            <div className="w-[100%] md:w-[75%] lg:w-[83%] min-h-full text-center">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2">
                     {
                         filteredProducts.map((product:any, index:any) => (

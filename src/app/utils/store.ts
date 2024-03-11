@@ -25,3 +25,8 @@ export const useProductStore = create<productStoreType>((set)=>({
     products:[],
     setProducts: (newProducts) => set({products: newProducts}),
 }))
+
+export const useFilterDropDownStore = create((set)=>({
+    isFilterDropdownOpen: false,
+    toggleFilterDropDown: () => set((state:any) => ({isFilterDropdownOpen: !state.isFilterDropdownOpen}))
+}))
