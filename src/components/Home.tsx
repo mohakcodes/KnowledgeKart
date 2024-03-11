@@ -7,11 +7,10 @@ import { useFilterDropDownStore, useProductStore, useUserStore } from "@/app/uti
 
 export default function Home(){
 
-    const {user, setUser} = useUserStore();
     const {isFilterDropdownOpen}:any = useFilterDropDownStore();
     
     //main store for product data
-    const {products, setProducts} = useProductStore();
+    const {products,setProducts} = useProductStore();
     //the products that will be displayed
     const [filteredProducts,setFilteredProducts]:any = useState([]);
     //to keep track of all brands
@@ -33,23 +32,12 @@ export default function Home(){
             });
             setAllBrands(uniqueBrands);
           };
-          
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/api/auth/refresh');
-                const data = response.data.data;
-                if(data === null) return;
-                setUser({email:data.email,username:data.username,id:data._id,isAdmin:data.isAdmin});
-                console.log("User",user);
-            } 
-            catch (error) {
-                console.log("Error",error);
-            }
-        }
+
         const fetchProducts = async () => {
             try {
                 const response = await axios.get('/api/products');
                 const data = response.data;
+                console.log("Products",data);
                 setProducts(data);
                 setFilteredProducts(data);
                 setBrands(data);
@@ -58,7 +46,6 @@ export default function Home(){
                 console.log("Error",error);
             }
         }
-        fetchData();
         fetchProducts();
     },[])
 
