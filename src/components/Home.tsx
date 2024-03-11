@@ -8,6 +8,8 @@ import { useFilterDropDownStore, useProductStore, useUserStore } from "@/app/uti
 export default function Home(){
 
     const {isFilterDropdownOpen}:any = useFilterDropDownStore();
+
+    const [loading, setLoading] = useState(true);
     
     //main store for product data
     const {products,setProducts} = useProductStore();
@@ -44,6 +46,9 @@ export default function Home(){
             } 
             catch (error) {
                 console.log("Error",error);
+            }
+            finally {
+                setLoading(false);
             }
         }
         fetchProducts();
@@ -221,17 +226,25 @@ export default function Home(){
                 </div>
             </div>
 
-            <div className="w-[100%] md:w-[75%] lg:w-[83%] min-h-full text-center">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2">
-                    {
-                        filteredProducts.map((product:any, index:any) => (
-                            <div key={index} className="px-2">
-                                <ProductCard product={product} />
-                            </div>
-                        ))
-                    }
+            {
+                loading 
+                ?
+                <div className='flex p-3 text-black font-bold text-xl sm:text-2xl'>
+                    Loading Products...
+                </div> 
+                :
+                <div className="w-[100%] md:w-[75%] lg:w-[83%] min-h-full text-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2">
+                        {
+                            filteredProducts.map((product:any, index:any) => (
+                                <div key={index} className="px-2">
+                                    <ProductCard product={product} />
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }

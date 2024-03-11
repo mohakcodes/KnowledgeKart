@@ -9,6 +9,8 @@ import React, { useEffect, useState } from 'react'
 export default function ProductPage() {
 
   const [product, setProduct] = useState({} as ProductType);
+  const [loading, setLoading] = useState(true);
+  const [notExists, setNotExists] = useState(false);
 
   const {productID} = useParams();
 
@@ -16,18 +18,40 @@ export default function ProductPage() {
     const fetchProductDetails = async () => {
         try {
             const repsonse = await axios.get(`/api/products/${productID}`);
-            console.log("Client",repsonse.data);
             setProduct(repsonse.data);
         } 
         catch (error) {
-            console.log(error);
+            console.log("Err",error);
+            setNotExists(true);
+        }
+        finally {
+            setLoading(false);
         }
     }
     fetchProductDetails();
   },[productID]);
 
+  if (loading) {
+    return(
+      <div className='flex justify-center my-auto text-black font-bold text-xl sm:text-2xl'>
+        Loading Product Details...
+      </div>
+    )
+  }
+
+  if (notExists) {
+    return(
+      <div className='flex justify-center my-auto text-black font-bold text-xl sm:text-2xl'>
+        Product Not Found
+      </div>
+    )
+  }
+
   return (
     <div className="container mx-auto p-4 px-9">
+      <div className='text-black font-bold text-xl pl-3 my-4'>
+        <a href="/" className='px-4 py-1 bg-red-400 rounded-lg'>BACK ↩</a>
+      </div>
       <div className="flex flex-col sm:flex-row">
         <div className="md:col-span-2 lg:col-span-2 w-[100%] sm:w-[40%]">
           <Image src={product.image} alt={product.name} width={450} height={450} />
