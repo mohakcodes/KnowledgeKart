@@ -77,11 +77,11 @@ export default function Navbar(){
                 {
                     user.email && user.id && user.username ? (
                         <details>
-                            <summary className="sm:text-sm md:text-base lg:text-[20px] text-black font-medium">
+                            <summary className="sm:text-sm md:text-base lg:text-[20px] mr-3 text-black font-medium">
                                 More
                             </summary>
-                            <ul className="p-0 sm:p-2 rounded-t-none bg-slate-500 sm:mr-2">
-                                <li className="sm:text-[16px] text-white font-medium"><a>Edit</a></li>
+                            <ul className="p-0 sm:p-2 rounded-t-none bg-slate-500 sm:mr-0 border-2 border-slate-600">
+                                <li className="sm:text-[16px] p-0 text-white font-medium"><a>Edit</a></li>
                                 {
                                     user.isAdmin ? (
                                         <li className="sm:hidden text-white font-medium"><a href="/addproduct">Add Product</a></li>
@@ -89,6 +89,7 @@ export default function Navbar(){
                                         null
                                     )
                                 }
+                                <li className="sm:text-[16px] text-white font-medium"><a href="/cart">Cart</a></li>
                                 <li className="sm:text-[16px] text-white font-medium"><a onClick={logoutFn}>Logout</a></li>
                             </ul>
                         </details>

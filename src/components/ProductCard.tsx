@@ -1,6 +1,8 @@
 import { ProductType } from "@/app/types"
+import { useSuccessStore } from "@/app/utils/store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
 type Props = {
     product: ProductType;
@@ -9,14 +11,17 @@ type Props = {
 export default function ProductCard({product}:Props){
 
     const router = useRouter();
+    const {successToast} = useSuccessStore();
 
     const addToCartNavigation = (e:any) => {
         e.stopPropagation();
+        successToast();
         return;
     }
 
     return(
         <div className="card card-compact w-90 bg-gray-300 shadow-xl border-2 border-gray-200">
+        <Toaster/>
         <figure className="h-44 overflow-hidden">
             <Image 
                 src={product.image} 
@@ -51,7 +56,7 @@ export default function ProductCard({product}:Props){
                 </button>
                 <button 
                     className="px-3 py-2 bg-blue-400 text-black rounded-md"
-                    onClick={addToCartNavigation}
+                    onClick={(e)=>{addToCartNavigation(e)}}
                 >
                     Add to Cart
                 </button>

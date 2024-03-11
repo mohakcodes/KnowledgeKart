@@ -1,5 +1,6 @@
 import {create} from "zustand";
 import {ProductType, UserType} from '@/app/types'
+import toast from 'react-hot-toast'
 
 interface userStoreType {
     user : UserType;
@@ -29,4 +30,8 @@ export const useProductStore = create<productStoreType>((set)=>({
 export const useFilterDropDownStore = create((set)=>({
     isFilterDropdownOpen: false,
     toggleFilterDropDown: () => set((state:any) => ({isFilterDropdownOpen: !state.isFilterDropdownOpen}))
+}))
+
+export const useSuccessStore = create(()=>({
+    successToast: () => toast.success('Added to cart'),
 }))
