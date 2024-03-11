@@ -11,9 +11,6 @@ export default function ProductPage() {
   const [product, setProduct] = useState({} as ProductType);
 
   const {productID} = useParams();
-  if(!productID){
-    return <div>Loading...</div>
-  }
 
   useEffect(()=>{
     const fetchProductDetails = async () => {
@@ -27,7 +24,7 @@ export default function ProductPage() {
         }
     }
     fetchProductDetails();
-  },[]);
+  },[productID]);
 
   return (
     <div className="container mx-auto p-4 px-9">
