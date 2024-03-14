@@ -13,6 +13,7 @@ export const useUserStore = create<userStoreType>((set)=>({
         email:"",
         id:"",
         isAdmin:false,
+        cart:[],
     },
     setUser: (newuser) => set({user: newuser}),
 }))
@@ -34,4 +35,5 @@ export const useFilterDropDownStore = create((set)=>({
 
 export const useSuccessStore = create(()=>({
     successToast: () => toast.success('Added to cart'),
+    errorToast: () => toast.error('Login First'),
 }))

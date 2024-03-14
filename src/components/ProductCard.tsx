@@ -1,5 +1,6 @@
 import { ProductType } from "@/app/types"
 import { useSuccessStore } from "@/app/utils/store";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
@@ -11,11 +12,19 @@ type Props = {
 export default function ProductCard({product}:Props){
 
     const router = useRouter();
-    const {successToast} = useSuccessStore();
+    const {successToast,errorToast} = useSuccessStore();
 
-    const addToCartNavigation = (e:any) => {
+    const addToCartNavigation = async(e:any) => {
         e.stopPropagation();
-        successToast();
+        const response = await axios.get('/api/auth/refresh');
+        if(response.data.data === null){
+            errorToast();
+        }
+        else{
+            const response = await axios.post('/api/addtocart',{product});
+            console.log("Is Prod. Added To Cart ?",response);
+            successToast();
+        }
         return;
     }
 

@@ -16,10 +16,10 @@ export default function Navbar(){
             const response = await axios.get('/api/auth/refresh');
             const data = response.data.data;
             if(data === null){
-                setUser({email:"",username:"",id:"",isAdmin:false});
+                setUser({email:"",username:"",id:"",isAdmin:false,cart:[]});
                 return;
             }
-            setUser({email:data.email,username:data.username,id:data._id,isAdmin:data.isAdmin});
+            setUser({email:data.email,username:data.username,id:data._id,isAdmin:data.isAdmin,cart:data.cart});
         } 
         catch (error) {
             console.log("BT",error);
@@ -30,7 +30,7 @@ export default function Navbar(){
         try {
             await axios.get('/api/auth/logout');
             router.push('/auth/login');
-            setUser({email:"",username:"",id:"",isAdmin:false});
+            setUser({email:"",username:"",id:"",isAdmin:false,cart:[]});
             console.log("user",user);
         } 
         catch (error:any) {

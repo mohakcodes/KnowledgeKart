@@ -14,4 +14,5 @@ export type UserType = {
     email:String,
     id:String,
     isAdmin:boolean,
+    cart:ProductType[],
 }

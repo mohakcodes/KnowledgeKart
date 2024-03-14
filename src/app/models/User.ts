@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ProductType } from "../types";
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -19,6 +20,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false,
     },
+    cart:{
+        type: Array<ProductType>(),
+        default: [],
+        required: true,
+    }
 })
 
 export const User = mongoose.models['user'] || mongoose.model("user", userSchema);
