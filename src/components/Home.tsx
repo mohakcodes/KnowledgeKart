@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import ProductCard from "./ProductCard";
 import axios from "axios";
-import { useFilterDropDownStore, useProductStore, useUserStore } from "@/app/utils/store";
+import { useFilterDropDownStore, useProductStore } from "@/app/utils/store";
 
 export default function Home(){
 
@@ -39,7 +39,6 @@ export default function Home(){
             try {
                 const response = await axios.get('/api/products');
                 const data = response.data;
-                console.log("Products",data);
                 setProducts(data);
                 setFilteredProducts(data);
                 setBrands(data);

@@ -21,7 +21,7 @@ export default function ProductPage() {
             setProduct(repsonse.data);
         } 
         catch (error) {
-            console.log("Err",error);
+            console.log("Error",error);
             setNotExists(true);
         }
         finally {

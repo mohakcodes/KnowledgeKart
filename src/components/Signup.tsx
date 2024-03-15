@@ -32,7 +32,6 @@ export default function Signup() {
     }
     try {
       const res = await axios.post('/api/auth/signup', user);
-      console.log("res",res);
       setError(false);
       router.push('login');
     } 

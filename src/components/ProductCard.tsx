@@ -22,7 +22,6 @@ export default function ProductCard({product}:Props){
         }
         else{
             const response = await axios.post('/api/addtocart',{product});
-            console.log("Is Prod. Added To Cart ?",response);
             successToast();
         }
         return;

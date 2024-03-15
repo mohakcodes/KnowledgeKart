@@ -22,7 +22,7 @@ export default function Navbar(){
             setUser({email:data.email,username:data.username,id:data._id,isAdmin:data.isAdmin,cart:data.cart});
         } 
         catch (error) {
-            console.log("BT",error);
+            console.log("Error",error);
         }
     }
 
@@ -31,7 +31,6 @@ export default function Navbar(){
             await axios.get('/api/auth/logout');
             router.push('/auth/login');
             setUser({email:"",username:"",id:"",isAdmin:false,cart:[]});
-            console.log("user",user);
         } 
         catch (error:any) {
             console.log(error.message);    
@@ -81,7 +80,6 @@ export default function Navbar(){
                                 More
                             </summary>
                             <ul className="p-0 sm:p-2 rounded-t-none bg-slate-500 sm:mr-0 border-2 border-slate-600">
-                                <li className="sm:text-[16px] p-0 text-white font-medium"><a>Edit</a></li>
                                 {
                                     user.isAdmin ? (
                                         <li className="sm:hidden text-white font-medium"><a href="/addproduct">Add Product</a></li>
