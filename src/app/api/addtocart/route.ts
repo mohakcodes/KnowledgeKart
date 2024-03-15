@@ -8,7 +8,6 @@ connectDB();
 export async function POST(req:NextRequest){
     try {
         const {product} = await req.json();
-        console.log("Product",product);
         const user = await getTokenData(req);
         const userDetails:any = await User.findById(user.id);
         const cart = userDetails.cart;
