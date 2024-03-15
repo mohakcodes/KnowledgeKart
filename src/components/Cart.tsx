@@ -48,8 +48,8 @@ export default function Cart() {
   return (
 
     <div className='flex flex-col text-center items-center'>
-      <div className='w-[80%] flex flex-col'>
-      <p className='font-bold bg-red-500 text-white mt-2 rounded-md'>Your Cart</p>
+      <div className='w-[70%] lg:w-[55%] flex flex-col'>
+      <p className='font-bold bg-slate-400 text-3xl text-white mt-2 rounded-md'>Your Cart</p>
       {user === undefined ? null : (
         user.cart.map((item: any, index:number) => (
           <div key={item.id} className='border rounded-md p-2 my-2 shadow-md flex md:flex-row flex-col items-center justify-between'>
